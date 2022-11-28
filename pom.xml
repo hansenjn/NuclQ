@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-  
+	<modelVersion>4.0.0</modelVersion>  
 	<parent>
-		<groupId>sc.fiji</groupId>
-		<artifactId>pom-fiji</artifactId>
-		<version>17.0.0</version>
+		<groupId>org.scijava</groupId>
+		<artifactId>pom-scijava</artifactId>
+		<version>17.1.1</version>
 		<relativePath />
 	</parent> 
  
  	<artifactId>NuclQ_JNH</artifactId>
  	<groupId>JNH</groupId>
     <version>0.0.2-SNAPSHOT</version>
- 
-<!-- Plugin Information -->
- 	<url>https://github.com/hansenjn/</url>
+    
+    <name>NuclQ_JNH</name>
+    <description>NuclQ</description>
+ 	<url>https://github.com/hansenjn/NuclQ</url>
 	<inceptionYear>2020</inceptionYear>
 	<organization>
 		<name>JNH</name>
@@ -33,7 +33,7 @@
         <developer>
             <id></id>
             <name>Jan Niklas Hansen</name>
-            <email>jan.hansen@caesar.de</email>
+            <email>jan.hansen@uni-bonn.de</email>
             <url>r</url>
             <organization></organization>
             <organizationUrl></organizationUrl>
@@ -65,16 +65,16 @@
 		</mailingList>
 	</mailingLists>
  	
-<!--  	<scm> -->
-<!-- 		<connection>scm:git:git://github.com/hansenjn/MotiQ/3D Analyzer</connection> -->
-<!-- 		<developerConnection>scm:git:git@github.com:hansenjn/MotiQ/3D Analyzer</developerConnection> -->
-<!-- 		<tag>HEAD</tag> -->
-<!-- 		<url>https://github.com/hansenjn/MotiQ/3D Analyzer</url> -->
-<!-- 	</scm> -->
+ 	<scm>
+		<connection>scm:git:git://github.com/hansenjn/NuclQ</connection>
+		<developerConnection>scm:git:git@github.com:hansenjn/NuclQ</developerConnection>
+		<tag>HEAD</tag>
+		<url>https://github.com/hansenjn/NuclQ</url>
+	</scm>
  	
  	<issueManagement>
 		<system>GitHub Issues</system>
-		<url>https://github.com/hansenjn/MotiQ/issues</url>
+		<url>https://github.com/hansenjn/NuclQ/issues</url>
 	</issueManagement>
  	
  	<ciManagement>
@@ -85,7 +85,7 @@
 		<main-class>NuclQMain</main-class>
 		<package-name>nuclQ_jnh</package-name>
 		<license.licenseName>gpl_v3</license.licenseName>
-		<license.copyrightOwners>Jan Niklas Hansen.</license.copyrightOwners>
+		<license.copyrightOwners>Jan N. Hansen</license.copyrightOwners>
 		<license.projectName>NuclQ</license.projectName>
 	</properties>
  	
@@ -96,27 +96,14 @@
         </repository>
     </repositories>
  
-<!-- TODO: See Optional Dependencies section -->
     <dependencies>
-        <!-- ImageJ dependencies -->
         <dependency>
             <groupId>net.imagej</groupId>
             <artifactId>ij</artifactId>
-        </dependency>        
-<!--         <dependency> -->
-<!--             <groupId>sc.fiji</groupId> -->
-<!--   			<artifactId>AnalyzeSkeleton_</artifactId> -->
-<!--         </dependency>	 -->
-<!--         <dependency> -->
-<!--             <groupId>sc.fiji</groupId> -->
-<!--   			<artifactId>Skeletonize3D_</artifactId> -->
-<!--         </dependency>	 -->
+        </dependency>   
     </dependencies>  
     
     <build>
-<!--        <directory>target</directory> -->
-<!--     	<outputDirectory>target/classes</outputDirectory> -->
-<!--     	<finalName>${artifactId}-${version}</finalName> -->
 		<plugins>
 			<!--         avoid errors in java doc creation -->			
 			<plugin>
@@ -131,7 +118,7 @@
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
 					<projectName>NuclQ plugin for ImageJ.</projectName>
-					<organizationName>Jan Niklas Hansen</organizationName>
+					<organizationName>Jan N. Hansen</organizationName>
 					<descriptorRefs>
             			<descriptorRef>jar-with-dependencies</descriptorRef>
           			</descriptorRefs>
@@ -142,10 +129,6 @@
 					</archive>
 				</configuration>
 			</plugin>
-			
-
 		</plugins>
-	</build>  
-    <name>NuclQ_JNH</name>
-    <description>NuclQ</description>
+	</build>
 </project>
