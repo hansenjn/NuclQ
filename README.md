@@ -40,8 +40,10 @@ NuclQ
 
 ### Settings
 The following settings dialog pops up when launching the plugin - here is an explanation of individual settings:
-![NuclQ settings](https://user-images.githubusercontent.com/27991883/204276811-651ac146-01f6-41fa-8e77-09b77a5b5d69.png)
 
+<p align="center">
+   <img src="https://user-images.githubusercontent.com/27991883/204276811-651ac146-01f6-41fa-8e77-09b77a5b5d69.png" width=500>
+</p>
 
 ### Example run
 
