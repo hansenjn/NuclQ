@@ -63,7 +63,7 @@ NuclQ uses the channel specified as the "DAPI channel" to determine and detect o
 2. NuclQ segments the channel into for- and background by using the selected auto-threshold algorithm.
 3. NuclQ applies a Watershed algorithm to split joint objects
 
-NuclQ detects all the individual particles in the image as individual objects.
+NuclQ detects all the individual particles in the image as individual objects. Particles are not included if they contain less pixels than what the user has specified at <img src="https://user-images.githubusercontent.com/27991883/204479856-b72c42dc-e845-465b-94d2-12d91a526723.png" height=18>.
 
 NuclQ filters the detected objects based on intensity information in Channel 1 and Channel 2
 1. NuclQ retrieves the pixel intensities in the additional channels "Channel 1" and "Channel 2" for those pixels that are positive in the segmented "DAPI channel" and that are inside the ROI selected by the user. 
@@ -87,8 +87,15 @@ NuclQ filters the detected objects based on intensity information in Channel 1 a
    <img src="https://user-images.githubusercontent.com/27991883/204475756-fe7eb5f6-995e-4a2a-8d15-825ebad72cd9.png" height=44>
 </p>
 
-NuclQ determines the intensity histograms for output
+NuclQ determines the intensity profiles that are output later:
+- For each pixel in the image the distance to all outline points of all objects is computed, the closest outline point will be assigned the pixel.
+- The pixel is however ignored and left unassigned, if the closest outline point is not within the acceptable range specified by the user: <img src="https://user-images.githubusercontent.com/27991883/204480950-f8155028-1b05-43cd-ae36-e1653a357d07.png" height=20>
 
+- The pixel intensity is added to the individual intensity profile of the assigned outline point.
+- For each object the intensity profiles of the surrounding points are analyzed.
+- Depending on what the user has selected at <img src="https://user-images.githubusercontent.com/27991883/204479304-1b5acd69-fe26-4042-986f-af7ed0194f1e.png" height=22> the fraction of continuous outline points with the highest sum of intensity profile values is selected as the fraction of interest. E.g., if the user selected "4" the quarter of the outline points with the highest intensity sum is selected for further quantification.
+
+In a final step, for each object, all intensity profiles from all surrounding points are collected and merged into the intensity profiles that are output later.
 
 ### Output
 NuclQ
