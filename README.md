@@ -44,8 +44,6 @@ You may also use an image in which the object channel is already segmented (= "b
    <img src="https://user-images.githubusercontent.com/27991883/204472676-3c0d0841-3547-4331-906d-885036161142.png" width=200>
 </p>
 
-
-
 ### Processing & Analysis
 #### Launching NuclQ
 Launch NuclQ via the menu entry Plugins > JNH > NuclQ...
@@ -57,13 +55,21 @@ The following settings dialog pops up when launching the plugin - here is an exp
    <img src="https://user-images.githubusercontent.com/27991883/204276811-651ac146-01f6-41fa-8e77-09b77a5b5d69.png" width=500>
 </p>
 
+- The process option <img src="https://user-images.githubusercontent.com/27991883/204499384-cf646cc9-273d-4bf5-9b37-0b491494a8af.png" height=22> allows you to decide whether you want to process the active image or all images open in FIJI or use the multi-task manager to select a list of files to be analyzed that are not open in FIJI (see below). Note that any processed image needs to be saved somewhere on your file system for proper functioning and output of plots.
+- Calibration Settings: if your image has no pixel calibration specified, you should check the box "manually calibrate image" and add the information here. To check whether your image is calibrated just look at the bar on top of the image window. If there is a calibration unit specified there is no reason for recalibrating:
+
+<p align="center">
+   <img src="https://user-images.githubusercontent.com/27991883/204501844-cc6471d7-5908-419b-8e69-e74441798939.png" width=300>
+</p>
+
+- Output settings: if you add the processing date to the output file names you avoid that you will override an analysis run on the same image.
+
 ### (Optionally) select images
 If the option <img src="https://user-images.githubusercontent.com/27991883/204499384-cf646cc9-273d-4bf5-9b37-0b491494a8af.png" height=22> was selected, NuclQ allows you to compile a list of files to be analyzed. After generating the list, start the processing.
 
 <p align="center">
    <img src="https://user-images.githubusercontent.com/27991883/204499657-0d5d613a-942f-4f0a-92a6-215cbcd01f61.png" width=400>
 </p>
-
 
 ### Initial selection of negative cells by the user
 NuclQ first asks the user to draw a region of interest (ROI) in each image to be analyzed. This ROI needs to circumscribe / contain only objects that are "signal-negative" in the channels used for filtering. If you do not want to use the filtering for "signal-positive" objects you can just circumscibe any objects (nuclei) here - you however need to make sure that the ROI contains at least one object (or at least a part of it).
@@ -128,7 +134,33 @@ NuclQ determines the intensity profiles that are output later:
 In a final step, for each object, all intensity profiles from all surrounding points are collected and merged into the intensity profiles that are output later.
 
 ### Output
-NuclQ
+NuclQ outputs a lot of different files that allow you to inspect the success of your analysis:
+
+<p align="center">
+   <img src="https://user-images.githubusercontent.com/27991883/204502656-e9b1fe97-e65d-4e02-8646-d8d700e86c3d.png" width=200
+</p>
+ 
+The naming of the file is based on the input file name (e.g., "ExampleFile.tif" above) and adding the label "_NuQ" for a NuclQ analysis, the number specified for fractioning at <img src="https://user-images.githubusercontent.com/27991883/204479304-1b5acd69-fe26-4042-986f-af7ed0194f1e.png" height=22> (e.g., "_4" above) and an outputfile specific ending. Some tif files (see e.g., ```_mp.tif``` below) also contain the object IDs as overlays allowing you to find a certain object in the numeric output data.
+ 
+Here is a description of each file with a screenshot of an example file - for clarity, we also provide the original image and the ROI drawn by the user on the left of some output files by their specific endings.
+- ```_bg.tif```: This file shows you which objects were used for calculating the threshold for "Channel 1" and "Channel 2"
+
+<p align="center">
+   <img src="https://user-images.githubusercontent.com/27991883/204503915-2aaffa4a-7f51-4512-bbcc-d7daab61a861.png" width=400
+</p>
+ 
+- ```_mp.tif```: This image provides a distance map to show as intensity how far a pixel was to an object. The mp.tif file can be best displayed by changing the LUT to "phase" in FIJI (Image > Look-Up-Table > Phase) - see bottom screenshot.
+<p align="center">
+ <img src="https://user-images.githubusercontent.com/27991883/204504477-65f568ee-a295-4861-b346-ea9b768778ae.png" width=600>
+ <br>
+ <img src="https://user-images.githubusercontent.com/27991883/204505093-a92c3a8d-5bd2-47df-860b-2d87f52277bb.png" width=600>
+</p>
+
+- ```_msk.tif```: This image shows the detected objects from the DAPI channel (as blue outlines), the segmeneted Channel 1 in red (2nd channel in the file), and the segmeneted Channel 2 in green (3rd channel in the file). Note that the colors here are not corresponding to the colors of the input image! The same file is also available as a rendered ```_msk.png``` file for direct display outside FIJI.
+
+<p align="center">
+ <img src="https://user-images.githubusercontent.com/27991883/204505795-270c8f1d-5f5f-478e-bd2c-f99517474ea0.png" width=600>
+</p>
 
 ### Special use cases
 
