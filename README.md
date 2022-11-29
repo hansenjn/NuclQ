@@ -6,8 +6,9 @@
 Copyright (C) 2020-2022: Jan N. Hansen
 
 ## Contact
+For questions, e.g., on using, copyright, and citing the plugin, please contact:
 
-jan.hansen (at) uni-bonn.de
+```jan.hansen (at) uni-bonn.de```
 
 ## Installing NuclQ
 NuclQ is an ImageJ plugin that can be run in ImageJ or the extended ImageJ version FIJI. Thus to use MotiQ you need to first have an ImageJ or FIJI software downloaded to your computer. ImageJ/FIJI are open-source, freely available softwares that can be downloaded [here](https://imagej.net/downloads).
