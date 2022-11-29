@@ -142,7 +142,10 @@ NuclQ outputs a lot of different files that allow you to inspect the success of 
  
 The naming of the file is based on the input file name (e.g., "ExampleFile.tif" above) and adding the label "_NuQ" for a NuclQ analysis, the number specified for fractioning at <img src="https://user-images.githubusercontent.com/27991883/204479304-1b5acd69-fe26-4042-986f-af7ed0194f1e.png" height=22> (e.g., "_4" above) and an outputfile specific ending. Some tif files (see e.g., ```_mp.tif``` below) also contain the object IDs as overlays allowing you to find a certain object in the numeric output data.
  
-Here is a description of each file with a screenshot of an example file - for clarity, we also provide the original image and the ROI drawn by the user on the left of some output files by their specific endings.
+Here follows a description of each file with a screenshot of an example file - for clarity, we also provide the original image and the ROI drawn by the user on the left of some output files by their specific endings.
+
+#### Output maps
+ 
 - ```_bg.tif```: This file shows you which objects were used for calculating the threshold for "Channel 1" and "Channel 2"
 
 <p align="center">
@@ -161,6 +164,45 @@ Here is a description of each file with a screenshot of an example file - for cl
 <p align="center">
  <img src="https://user-images.githubusercontent.com/27991883/204505795-270c8f1d-5f5f-478e-bd2c-f99517474ea0.png" width=600>
 </p>
+
+- ```ol.tif```: This image outlines the detected objects after filtering and provides also the IDs of the objects, allowing to find the results for a specific object in the image also in the output text files and plot. The same file is also available as a rendered ```_ol.png``` file for direct display outside FIJI.
+
+<p align="center">
+ <img src="https://user-images.githubusercontent.com/27991883/204522951-4033723f-56f5-47ce-a127-4078efabd88b.png" width=600>
+</p>
+
+#### Intensity profile plots
+The intensity profile plots are output for the different channels "Channel 1" (name contains ```_C1_```), "Channel 2" (name contains ```_C2_```), and "Channel of interest" (name contains ```_COI_```). For each channel there is the following ```.png``` files output:
+- ```_AVG.png```
+- ```_SD.png```
+- ```_QAVG.png```
+- ```_QSD.png```
+
+<p align="center">
+ <img src="https://user-images.githubusercontent.com/27991883/204526157-c7fc5270-7048-4f98-b857-2a0e2ea32078.png" width=200>
+</p>
+
+
+```_AVG.png``` and ```_SD.png``` show, for each individual object (labeled as "N1", "N2", ... in the plot), the mean and standard deviation, respectively, of the pixel intensities around the object, as a function of the distance to the object border (called "outline points" in the quantification section above). The outline object border is defined as the distance value of 0. Negative distance values refer to pixels inside the object, positive distance values refer to pixels outside the object.
+
+<p align="center">
+ <img src="https://user-images.githubusercontent.com/27991883/204525180-74db5849-9899-453c-8782-afb872abfb90.png" width=300>
+ <img src="https://user-images.githubusercontent.com/27991883/204525209-0126dc02-643c-4e03-bc9c-0b9238a50c29.png" width=300>
+</p>
+
+```_QAVG.png``` and ```_QSD.png``` are computed as the ```_AVG.png``` and ```_SD.png``` profiles but including only the continuous stretch of outline points that yielded the largest sum of pixel intensities in the profile (the length of this stretch is defined by the parameter <img src="https://user-images.githubusercontent.com/27991883/204479304-1b5acd69-fe26-4042-986f-af7ed0194f1e.png" height=22>, see quantification section for more information).
+
+<p align="center">
+ <img src="https://user-images.githubusercontent.com/27991883/204525205-0e43b028-2a03-4938-9be0-93e6812fcd68.png" width=300>
+ <img src="https://user-images.githubusercontent.com/27991883/204525185-cb631b52-2c23-4125-99a4-9666cfe207b3.png" width=300>
+</p>
+
+The raw values for each plot are provided in the text file (see below).
+
+#### Text file with raw data
+
+#### ROI file
+- ```_.roi```: This file stores the ROI that the user selected for the image. Open the image and drag and drop this .roi file into FIJI to display the ROI again in the image.
 
 ### Special use cases
 
