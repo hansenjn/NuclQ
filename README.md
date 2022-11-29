@@ -64,14 +64,18 @@ The following settings dialog pops up when launching the plugin - here is an exp
 
 - Output settings: if you add the processing date to the output file names you avoid that you will override an analysis run on the same image.
 
-### (Optionally) select images
+##### Note for customizing settings
+You will in any case need to adapt the parameters ```Minimum size of accepted nuclei``` and the ```Maximum distance to the nuclear membrane``` to your study question. - ```Minimum size of accepted nuclei``` should be selected as small that still obejcts are excluded that are too small to be considered an object according to your study question.
+- ```Maximum distance to the nuclear membrane``` defines the length of the intensity profiles in the output files (see section on intensity profile plots, x-axis of these plots). E.g., if you select "5.0" for this parameter, the profiles will only range from ```-5.0``` to ```+5.0```.
+
+#### (Optionally) select images
 If the option <img src="https://user-images.githubusercontent.com/27991883/204499384-cf646cc9-273d-4bf5-9b37-0b491494a8af.png" height=22> was selected, NuclQ allows you to compile a list of files to be analyzed. After generating the list, start the processing.
 
 <p align="center">
    <img src="https://user-images.githubusercontent.com/27991883/204499657-0d5d613a-942f-4f0a-92a6-215cbcd01f61.png" width=400>
 </p>
 
-### Initial selection of negative cells by the user
+#### Initial selection of negative cells by the user
 NuclQ first asks the user to draw a region of interest (ROI) in each image to be analyzed. This ROI needs to circumscribe / contain only objects that are "signal-negative" in the channels used for filtering. If you do not want to use the filtering for "signal-positive" objects you can just circumscibe any objects (nuclei) here - you however need to make sure that the ROI contains at least one object (or at least a part of it).
 
 When all ROIs are set, all images are subjected to the analysis pipeline and all the following processing is fully-automated. A "progress dialog" informs about analysis progress. When the analysis is done the bar will turn green (on windows computers - not so on Mac computers) and the status bar will say "analysis done!" (on any opereating system).
@@ -90,14 +94,14 @@ In the following image we want to detect the blue DAPI nuclei, we want to detect
  <i>Image: (c) Jan N. Hansen.</i>
 </p>
 
-### Automatic Processing and Quantification
-#### Preprocessing
+#### Automatic Processing and Quantification
+##### Preprocessing
 NuclQ uses the channel specified as the "DAPI channel" to determine and detect objects as follows:
 1. If selected by the user, NuclQ blurs the channel with a Gaussian blur based on the user-defined sigma.
 2. NuclQ segments the channel into for- and background by using the selected auto-threshold algorithm.
 3. NuclQ applies a Watershed algorithm to split joint objects
 
-#### Detection & Filtering
+##### Detection & Filtering
 NuclQ detects all the individual particles in the image as individual objects. Particles are not included if they contain less pixels than what the user has specified at <img src="https://user-images.githubusercontent.com/27991883/204479856-b72c42dc-e845-465b-94d2-12d91a526723.png" height=18>.
 
 NuclQ filters the detected objects based on intensity information in Channel 1 and Channel 2
@@ -122,7 +126,7 @@ NuclQ filters the detected objects based on intensity information in Channel 1 a
    <img src="https://user-images.githubusercontent.com/27991883/204475756-fe7eb5f6-995e-4a2a-8d15-825ebad72cd9.png" height=44>
 </p>
 
-#### Quantification
+##### Quantification
 NuclQ determines the intensity profiles that are output later:
 - For each pixel in the image the distance to all outline points of all objects is computed, the closest outline point will be assigned the pixel.
 - The pixel is however ignored and left unassigned, if the closest outline point is not within the acceptable range specified by the user: <img src="https://user-images.githubusercontent.com/27991883/204480950-f8155028-1b05-43cd-ae36-e1653a357d07.png" height=20>
@@ -140,57 +144,57 @@ NuclQ outputs a lot of different files that allow you to inspect the success of 
    <img src="https://user-images.githubusercontent.com/27991883/204502656-e9b1fe97-e65d-4e02-8646-d8d700e86c3d.png" width=200
 </p>
  
-The naming of the file is based on the input file name (e.g., "ExampleFile.tif" above) and adding the label "_NuQ" for a NuclQ analysis, the number specified for fractioning at <img src="https://user-images.githubusercontent.com/27991883/204479304-1b5acd69-fe26-4042-986f-af7ed0194f1e.png" height=22> (e.g., "_4" above) and an outputfile specific ending. Some tif files (see e.g., ```_mp.tif``` below) also contain the object IDs as overlays allowing you to find a certain object in the numeric output data.
+The naming of the file is based on the input file name (e.g., "ExampleFile.tif" above) and adding the label "_NuQ" for a NuclQ analysis, the number specified for fractioning at <img src="https://user-images.githubusercontent.com/27991883/204479304-1b5acd69-fe26-4042-986f-af7ed0194f1e.png" height=22> (e.g., "_4" above) and an outputfile specific ending. Some tif files (see e.g., ```..._mp.tif``` below) also contain the object IDs as overlays allowing you to find a certain object in the numeric output data.
  
 Here follows a description of each file with a screenshot of an example file - for clarity, we also provide the original image and the ROI drawn by the user on the left of some output files by their specific endings.
 
 #### Output maps
  
-- ```_bg.tif```: This file shows you which objects were used for calculating the threshold for "Channel 1" and "Channel 2"
+- ```..._bg.tif```: This file shows you which objects were used for calculating the threshold for "Channel 1" and "Channel 2"
 
 <p align="center">
    <img src="https://user-images.githubusercontent.com/27991883/204503915-2aaffa4a-7f51-4512-bbcc-d7daab61a861.png" width=400
 </p>
  
-- ```_mp.tif```: This image provides a distance map to show as intensity how far a pixel was to an object. The mp.tif file can be best displayed by changing the LUT to "phase" in FIJI (Image > Look-Up-Table > Phase) - see bottom screenshot.
+- ```..._mp.tif```: This image provides a distance map to show as intensity how far a pixel was to an object. The mp.tif file can be best displayed by changing the LUT to "phase" in FIJI (Image > Look-Up-Table > Phase) - see bottom screenshot.
 <p align="center">
  <img src="https://user-images.githubusercontent.com/27991883/204504477-65f568ee-a295-4861-b346-ea9b768778ae.png" width=600>
  <br>
  <img src="https://user-images.githubusercontent.com/27991883/204505093-a92c3a8d-5bd2-47df-860b-2d87f52277bb.png" width=600>
 </p>
 
-- ```_msk.tif```: This image shows the detected objects from the DAPI channel (as blue outlines), the segmeneted Channel 1 in red (2nd channel in the file), and the segmeneted Channel 2 in green (3rd channel in the file). Note that the colors here are not corresponding to the colors of the input image! The same file is also available as a rendered ```_msk.png``` file for direct display outside FIJI.
+- ```..._msk.tif```: This image shows the detected objects from the DAPI channel (as blue outlines), the segmeneted Channel 1 in red (2nd channel in the file), and the segmeneted Channel 2 in green (3rd channel in the file). Note that the colors here are not corresponding to the colors of the input image! The same file is also available as a rendered ```..._msk.png``` file for direct display outside FIJI.
 
 <p align="center">
  <img src="https://user-images.githubusercontent.com/27991883/204505795-270c8f1d-5f5f-478e-bd2c-f99517474ea0.png" width=600>
 </p>
 
-- ```ol.tif```: This image outlines the detected objects after filtering and provides also the IDs of the objects, allowing to find the results for a specific object in the image also in the output text files and plot. The same file is also available as a rendered ```_ol.png``` file for direct display outside FIJI.
+- ```ol.tif```: This image outlines the detected objects after filtering and provides also the IDs of the objects, allowing to find the results for a specific object in the image also in the output text files and plot. The same file is also available as a rendered ```..._ol.png``` file for direct display outside FIJI.
 
 <p align="center">
  <img src="https://user-images.githubusercontent.com/27991883/204522951-4033723f-56f5-47ce-a127-4078efabd88b.png" width=600>
 </p>
 
 #### Intensity profile plots
-The intensity profile plots are output for the different channels "Channel 1" (name contains ```_C1_```), "Channel 2" (name contains ```_C2_```), and "Channel of interest" (name contains ```_COI_```). For each channel there is the following ```.png``` files output:
-- ```_AVG.png```
-- ```_SD.png```
-- ```_QAVG.png```
-- ```_QSD.png```
+The intensity profile plots are output for the different channels "Channel 1" (name contains ```..._C1_...```), "Channel 2" (name contains ```..._C2_...```), and "Channel of interest" (name contains ```..._COI_...```). For each channel there is the following ```.png``` files output:
+- ```..._AVG.png```
+- ```..._SD.png```
+- ```..._QAVG.png```
+- ```..._QSD.png```
 
 <p align="center">
  <img src="https://user-images.githubusercontent.com/27991883/204526157-c7fc5270-7048-4f98-b857-2a0e2ea32078.png" width=200>
 </p>
 
 
-```_AVG.png``` and ```_SD.png``` show, for each individual object (labeled as "N1", "N2", ... in the plot), the mean and standard deviation, respectively, of the pixel intensities around the object, as a function of the distance to the object border (called "outline points" in the quantification section above). The outline object border is defined as the distance value of 0. Negative distance values refer to pixels inside the object, positive distance values refer to pixels outside the object.
+```..._AVG.png``` and ```..._SD.png``` show, for each individual object (labeled as "N1", "N2", ... in the plot), the mean and standard deviation, respectively, of the pixel intensities around the object, as a function of the distance to the object border (called "outline points" in the quantification section above). The outline object border is defined as the distance value of 0. Negative distance values refer to pixels inside the object, positive distance values refer to pixels outside the object.
 
 <p align="center">
  <img src="https://user-images.githubusercontent.com/27991883/204525180-74db5849-9899-453c-8782-afb872abfb90.png" width=300>
  <img src="https://user-images.githubusercontent.com/27991883/204525209-0126dc02-643c-4e03-bc9c-0b9238a50c29.png" width=300>
 </p>
 
-```_QAVG.png``` and ```_QSD.png``` are computed as the ```_AVG.png``` and ```_SD.png``` profiles but including only the continuous stretch of outline points that yielded the largest sum of pixel intensities in the profile (the length of this stretch is defined by the parameter <img src="https://user-images.githubusercontent.com/27991883/204479304-1b5acd69-fe26-4042-986f-af7ed0194f1e.png" height=22>, see quantification section for more information).
+```..._QAVG.png``` and ```..._QSD.png``` are computed as the ```..._AVG.png``` and ```..._SD.png``` profiles but including only the continuous stretch of outline points that yielded the largest sum of pixel intensities in the profile (the length of this stretch is defined by the parameter <img src="https://user-images.githubusercontent.com/27991883/204479304-1b5acd69-fe26-4042-986f-af7ed0194f1e.png" height=22>, see quantification section for more information).
 
 <p align="center">
  <img src="https://user-images.githubusercontent.com/27991883/204525205-0e43b028-2a03-4938-9be0-93e6812fcd68.png" width=300>
@@ -200,11 +204,56 @@ The intensity profile plots are output for the different channels "Channel 1" (n
 The raw values for each plot are provided in the text file (see below).
 
 #### Text file with raw data
+- ```...m.txt```: This is a tab-delimited text file that allows you to retrieve the settings applied in the analysis and the numeric values for all intensity profiles. For better seeing the table structure you may copy the contents into a table software (e.g., Excel or similar). The file starts with a ```Settings:```-Block in which the different settings selected by the user are logged. Later the exact numeric data for each Intensity profile plot follow, in the ```Results:```-Block. Each object is denoted as a line, the distance coordinates are denoted in columns. For each object, also the overlap with the analyzed channel is given for "Channel 1" and "Channel 2".
+
+<p align="center">
+ <img src="https://user-images.githubusercontent.com/27991883/204526996-ab458b1c-dec7-4ea3-bbcc-6195b416b144.png" width=400>
+</p>
+
+<p align="center">
+ <img src="https://user-images.githubusercontent.com/27991883/204527352-7017e6e4-b458-407f-a025-16cda49e74e9.png" width=1000>
+</p>
 
 #### ROI file
-- ```_.roi```: This file stores the ROI that the user selected for the image. Open the image and drag and drop this .roi file into FIJI to display the ROI again in the image.
+- ```..._.roi```: This file stores the ROI that the user selected for the image. Open the image and drag and drop this .roi file into FIJI to display the ROI again in the image.
 
-### Special use cases
+### Special notes for special use cases
+#### Extra use case 1: Use binarized input image
+You may also use an image in which the object channel is already segmented (= "binarize") - in this case, unselect blurring and select the "Default" auto-threshold algorithm in the settings dialog:
+
+<p align="center">
+   <img src="https://user-images.githubusercontent.com/27991883/204472566-f6d0d7ed-dc02-4a18-9800-f06fc5f15c21.png" width=300>
+   <br>
+   <img src="https://user-images.githubusercontent.com/27991883/204472676-3c0d0841-3547-4331-906d-885036161142.png" width=200>
+</p>
+
+#### Extra use case 2: No filtering
+You can also run this software without filtering the object channel - to do this set the following settings to the described values:
+
+- Set the identifiers for "Channel 1" and "Channel 2" to the same number as what you select as the object channel ("DAPI channel"). E.g., if your object channel is channel 1, set:
+
+<p align="center">
+ <img src="https://user-images.githubusercontent.com/27991883/204528634-f5938f26-5f2b-4bef-9672-58f7c3c2459a.png" height=60>
+</p>
+
+- Set the fold SD threshold to 0.0:
+
+<p align="center">
+ <img src="https://user-images.githubusercontent.com/27991883/204528913-0261b2ad-2e8d-4a11-80d3-f0a2d662dd91.png" height=22>
+</p>
+
+- Set the minimum overlaps to 0:
+
+<p align="center">
+ <img src="https://user-images.githubusercontent.com/27991883/204529176-13cf1eb6-0647-4a9c-8dcf-1fdec257e7ad.png" height=45>
+</p>
+
+#### Extra use case 2: No "divisioning"
+You can also run this software without revealing results for the highest-intensity region, which will speed up the analysis. In this case set the "Divisioning" to 1:
+
+<p align="center">
+ <img src="https://user-images.githubusercontent.com/27991883/204529475-f91088b7-4127-40e4-8277-8bae5ec9d81b.png" height=22>
+</p>
 
 
 
