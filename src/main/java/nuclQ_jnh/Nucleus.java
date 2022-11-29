@@ -234,6 +234,7 @@ class Nucleus{
 		double maxSum = 0.0;
 		double [] profile;
 		
+		//TODO: skip if part = 1!
 		for(int i = 0; i < surfacePoints.size(); i++){
 			profileSum = 0;
 			for(int j = 0; j < nPoints; j++){
