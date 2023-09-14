@@ -27,7 +27,7 @@ Now, the installed plugin can be launched via the FIJI/ImageJ menu entry at Plug
 
 ## Manual / Instructions on how to use NuclQ
 ### Scope of the plugin
-NuclQ allows you to determine intensity levels in cells as a function of the distance to the nuclear border. It is thus useful for determining nuclear intensity level and also intensity levels in the cytoplasm / close to the nucleus. The same program may also be used to study intensity levels as a function of the distance to any other object(s) of interest as long as you can provide a channel whereh these objects are clearly distinguishable from the background.
+NuclQ allows you to determine intensity levels in cells as a function of the distance to the nuclear border. It is thus useful for determining nuclear intensity level and also intensity levels in the cytoplasm / close to the nucleus. The same program may also be used to study intensity levels as a function of the distance to any other object(s) of interest as long as you can provide a channel in which these objects are clearly distinguishable from the background.
 
 NuclQ allows to prefilter the objects based on intensity levels in two more channels (e.g., including only objects that are considered "signal-positive" in another channel).
 
