@@ -3,7 +3,7 @@
 
 ## Copyright notice
 
-Copyright (C) 2020-2022: Jan N. Hansen
+Copyright (C) 2020-2023: Jan N. Hansen
 
 ## Contact
 For questions, e.g., on using, copyright, and citing the plugin, please contact:
